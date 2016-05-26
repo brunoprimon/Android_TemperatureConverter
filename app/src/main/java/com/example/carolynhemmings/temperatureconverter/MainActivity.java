@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
         F = [C] * 9/5 + 32 --> From Celsius to Fahrenheit
      */
 
-    private EditText tempEditText;
-    private Button celButton;
-    private Button fButton;
-    private TextView showTempTextView;
+    private EditText temperatureEditText;
+    private Button celsiusButton;
+    private Button fahrenheitButton;
+    private TextView showTemperatureTextView;
     private TextView displayResult;
 
     DecimalFormat round = new DecimalFormat("0.0");
@@ -37,47 +37,47 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        tempEditText = (EditText) findViewById(R.id.editText);
-        celButton = (Button) findViewById(R.id.celsiusButtonId);
-        fButton = (Button) findViewById(R.id.fButtonId);
-        showTempTextView = (TextView) findViewById(R.id.textView2);
+        temperatureEditText = (EditText) findViewById(R.id.editText);
+        celsiusButton = (Button) findViewById(R.id.celsiusButtonId);
+        fahrenheitButton = (Button) findViewById(R.id.fButtonId);
+        showTemperatureTextView = (TextView) findViewById(R.id.textView2);
         displayResult = (TextView) findViewById(R.id.displayResult);
 
-        celButton.setOnClickListener(new View.OnClickListener() {
+        celsiusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //call to convertToCelsius()
 
                 //Always convert EditText to string first or you get gibberish
-                String editTextVal = tempEditText.getText().toString();
+                String editTextValue = temperatureEditText.getText().toString();
 
                 //First validate that a value has been entered
-                if(editTextVal.isEmpty()) {
+                if (editTextValue.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Enter a Value", Toast.LENGTH_LONG).show();
                 } else {
                     //convert EditText string into a number
-                    double intEditText = Double.parseDouble(editTextVal);
+                    double intEditText = Double.parseDouble(editTextValue);
 
                     double convertedVal = convertToCelsius(intEditText);
 
                     //converts convertedVal back to a string
                     String stringResult = String.valueOf(round.format(convertedVal));
-                    showTempTextView.setText(stringResult + " C");
+                    showTemperatureTextView.setText(stringResult + " C");
                 }
 
             }
         });
 
-        fButton.setOnClickListener(new View.OnClickListener() {
+        fahrenheitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //call to convertToFahrenheit()
 
                 //Always convert EditText to string first or you get gibberish
-                String editTextVal = tempEditText.getText().toString();
+                String editTextVal = temperatureEditText.getText().toString();
 
                 //First validate that a value has been entered
-                if(editTextVal.isEmpty()) {
+                if (editTextVal.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Enter a Value", Toast.LENGTH_LONG).show();
                 } else {
                     //convert EditText string into a number
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //converts convertedVal back to a string
                     String stringResult = String.valueOf(round.format(convertedVal));
-                    showTempTextView.setText(stringResult + " F");
+                    showTemperatureTextView.setText(stringResult + " F");
                 }
 
 
@@ -104,16 +104,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public double convertToCelsius(double farVal) {
+    public double convertToCelsius(double farenheitValue) {
         // C = ([F] - 32) * 5/9 --> From Fahrenheit to Celsius
-        double resultCel = (farVal - 32) * 5/9;
-        return resultCel;
+        double CelsiusResult = (farenheitValue - 32) * 5/9;
+        return CelsiusResult;
     }
 
-    public double convertToFahrenheit(double celVal) {
+    public double convertToFahrenheit(double celsiusValue) {
         // F = [C] * 9/5 + 32 --> From Celsius to Fahrenheit
-        double resultFahr = (celVal * 9/5) + 32;
-        return resultFahr;
+        double farenheitResult = (celsiusValue * 9/5) + 32;
+        return farenheitResult;
     }
 
     @Override
